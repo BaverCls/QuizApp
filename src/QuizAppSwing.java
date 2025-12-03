@@ -1,0 +1,297 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.Enumeration;
+
+public class QuizAppSwing extends JFrame {
+    private JPanel cardPanel;
+    private CardLayout cardLayout;
+
+    // Game State
+    private String studentName;
+    private Quiz currentQuiz;
+    private int currentQuestionIndex = 0;
+
+    // Components
+    private JTextField nameField;
+    private JPanel quizContentPanel;
+    private JLabel questionLabel;
+    private JPanel optionsPanel;
+    private ButtonGroup optionsGroup;
+
+    public QuizAppSwing() {
+        setTitle("Quiz Application");
+        setSize(600, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+
+        // 1. Setup Panel
+        cardPanel.add(createSetupPanel(), "SETUP");
+
+        // 2. Quiz Active Panel
+        cardPanel.add(createQuizPanel(), "QUIZ");
+
+
+        add(cardPanel);
+    }
+
+    private JPanel createSetupPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel title = new JLabel("Quiz");
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        panel.add(title, gbc);
+
+        gbc.gridy = 1; gbc.gridwidth = 1;
+        panel.add(new JLabel("Name:"), gbc);
+
+        nameField = new JTextField(20);
+        gbc.gridx = 1;
+        panel.add(nameField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
+        panel.add(new JLabel("Select Subject"), gbc);
+
+        JPanel subjectPanel = new JPanel(new GridLayout(1, 3, 10, 0));
+        ButtonGroup subjectGroup = new ButtonGroup();
+        String[] topics = {"Science", "History", "Technology"};
+        for (String topic : topics) {
+            JRadioButton btn = new JRadioButton(topic);
+            btn.setActionCommand(topic);
+            subjectGroup.add(btn);
+            subjectPanel.add(btn);
+        }
+        gbc.gridy = 3;
+        panel.add(subjectPanel, gbc);
+
+        gbc.gridy = 4;
+        panel.add(new JLabel("Select Difficulty"), gbc);
+
+        JPanel difficultyPanel = new JPanel(new GridLayout(1, 3, 10, 0));
+        ButtonGroup difficultyGroup = new ButtonGroup();
+        String[] difficulties = {"Easy", "Medium", "Hard"};
+        for (String level : difficulties) {
+            JRadioButton btn = new JRadioButton(level);
+            btn.setActionCommand(level);
+            difficultyGroup.add(btn);
+            difficultyPanel.add(btn);
+        }
+        gbc.gridy = 5;
+        panel.add(difficultyPanel, gbc);
+
+        JButton startQuizButton = new JButton("Start Quiz");
+        startQuizButton.setEnabled(false); // Initially disabled
+        startQuizButton.addActionListener(e -> {
+            String name = nameField.getText().trim();
+            if (name.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter your name");
+                return;
+            }
+
+            String selectedSubject = subjectGroup.getSelection() != null ? subjectGroup.getSelection().getActionCommand() : null;
+            String selectedDifficulty = difficultyGroup.getSelection() != null ? difficultyGroup.getSelection().getActionCommand() : null;
+
+            if (selectedSubject == null || selectedDifficulty == null) {
+                JOptionPane.showMessageDialog(this, "Please select both subject and difficulty");
+                return;
+            }
+
+            this.studentName = name;
+            this.currentQuiz = generateQuiz(selectedSubject, selectedDifficulty);
+            this.currentQuestionIndex = 0;
+
+            loadQuestionUI();
+            cardLayout.show(cardPanel, "QUIZ");
+        });
+
+        // Enable the Start Quiz button only when both subject and difficulty are selected
+        ActionListener enableStartButton = e -> {
+            if (subjectGroup.getSelection() != null && difficultyGroup.getSelection() != null) {
+                startQuizButton.setEnabled(true);
+            }
+        };
+
+        Enumeration<AbstractButton> subjectButtons = subjectGroup.getElements();
+        while (subjectButtons.hasMoreElements()) {
+            subjectButtons.nextElement().addActionListener(enableStartButton);
+        }
+
+        Enumeration<AbstractButton> difficultyButtons = difficultyGroup.getElements();
+        while (difficultyButtons.hasMoreElements()) {
+            difficultyButtons.nextElement().addActionListener(enableStartButton);
+        }
+
+        gbc.gridy = 6;
+        panel.add(startQuizButton, gbc);
+
+        return panel;
+    }
+
+    private JPanel createQuizPanel() {
+        JPanel panel = new JPanel(new BorderLayout(20, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        questionLabel = new JLabel("Soru burada görünecek");
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        questionLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
+        panel.add(questionLabel, BorderLayout.NORTH);
+
+        optionsPanel = new JPanel();
+        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+        panel.add(optionsPanel, BorderLayout.CENTER);
+
+        JButton nextButton = new JButton("Next Question");
+        nextButton.addActionListener(e -> handleNextQuestion());
+        panel.add(nextButton, BorderLayout.SOUTH);
+
+        return panel;
+    }
+
+    private void startQuiz(String topic, String difficulty) {
+        String name = nameField.getText().trim();
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your name");
+            return;
+        }
+
+        this.studentName = name;
+        this.currentQuiz = generateQuiz(topic, difficulty); // Generate 10 questions
+        this.currentQuestionIndex = 0;
+
+        loadQuestionUI();
+        cardLayout.show(cardPanel, "QUIZ");
+    }
+
+    // Soru UI ını yükler
+    private void loadQuestionUI() {
+        if (currentQuestionIndex >= currentQuiz.getQuestions().size()) {
+            showResults();
+            return;
+        }
+
+        Question q = currentQuiz.getQuestions().get(currentQuestionIndex);
+        questionLabel.setText("<html>Question " + (currentQuestionIndex + 1) + "/10: <br><br><br>" + q.getText() + "</html>");
+
+        optionsPanel.removeAll();
+        optionsGroup = new ButtonGroup();
+
+        if (q instanceof MultipleChoiceQuestion) {
+            String[] opts = ((MultipleChoiceQuestion) q).getOptions();
+            for (String opt : opts) {
+                JRadioButton rb = new JRadioButton(opt);
+                rb.setActionCommand(opt);
+                optionsGroup.add(rb);
+                optionsPanel.add(rb);
+            }
+        } else if (q instanceof TrueFalseQuestion) {
+            JRadioButton trueBtn = new JRadioButton("True");
+            trueBtn.setActionCommand("True");
+            JRadioButton falseBtn = new JRadioButton("False");
+            falseBtn.setActionCommand("False");
+
+            optionsGroup.add(trueBtn);
+            optionsGroup.add(falseBtn);
+            optionsPanel.add(trueBtn);
+            optionsPanel.add(falseBtn);
+        }
+
+        optionsPanel.revalidate();
+        optionsPanel.repaint();
+    }
+
+    private void handleNextQuestion() {
+        if (optionsGroup.getSelection() == null) {
+            JOptionPane.showMessageDialog(this, "Please mark an answer");
+            return;
+        }
+
+        String answer = optionsGroup.getSelection().getActionCommand();
+        currentQuiz.getQuestions().get(currentQuestionIndex).answer(answer);
+
+        currentQuestionIndex++;
+        loadQuestionUI();
+    }
+
+    private void showResults() {
+        JPanel resultPanel = new JPanel(new BorderLayout());
+
+        // Header
+        JPanel header = new JPanel(new GridLayout(2, 1));
+        header.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        header.setBackground(Color.DARK_GRAY);
+
+        JLabel scoreLabel = new JLabel("Score: " + currentQuiz.calculateScore() + " / 10");
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel nameLabel = new JLabel("Student: " + studentName);
+        nameLabel.setForeground(Color.LIGHT_GRAY);
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        header.add(scoreLabel);
+        header.add(nameLabel);
+        resultPanel.add(header, BorderLayout.NORTH);
+
+        // Incorrect Questions List
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (Question q : currentQuiz.getQuestions()) {
+            if (!q.checkAnswer()) {
+                listModel.addElement("<html><b>Soru:</b> " + q.getText() +
+                        "<br><b>Your Answer:</b> <font color='red'>" + q.getUserAnswer() + "</font>" +
+                        "<br><b>Correct:</b> <font color='green'>" + q.getCorrectAnswerDisplay() + "</font><br><hr></html>");
+            }
+        }
+
+        if (listModel.isEmpty()) {
+            listModel.addElement("Congratulations! You answered all of them correctly.");
+        }
+
+        JList<String> wrongList = new JList<>(listModel);
+        wrongList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+                return label;
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(wrongList);
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Your Wrong Answers"));
+        resultPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Restart Button
+        JButton restartBtn = new JButton("New Quiz");
+        restartBtn.addActionListener(e -> {
+            nameField.setText("");
+            cardLayout.show(cardPanel, "SETUP");
+        });
+        resultPanel.add(restartBtn, BorderLayout.SOUTH);
+
+        cardPanel.add(resultPanel, "RESULTS");
+        cardLayout.show(cardPanel, "RESULTS");
+    }
+
+    // Sorular
+    private Quiz generateQuiz(String topic, String difficulty) {
+        Quiz quiz = new Quiz(topic, difficulty);
+        quiz.getQuestions().addAll(QuestionBank.getQuestionsForTopic(topic, difficulty));
+        return quiz;
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new QuizAppSwing().setVisible(true);
+        });
+    }
+}
