@@ -23,6 +23,41 @@ public class QuestionBank {
                     "Light travels faster than sound.",
                     true
             ));
+
+            questions.add(new MultipleChoiceQuestion(
+                    "Which organ pumps blood through the human body?",
+                    new String[]{"Brain", "Lungs", "Heart", "Kidney"},
+                    "Heart"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which scientist proposed the theory of relativity?",
+                    new String[]{"Isaac Newton", "Albert Einstein", "Nikola Tesla", "Marie Curie"},
+                    "Albert Einstein"
+            ));
+
+            questions.add(new TrueFalseQuestion(
+                    "Whale is a mammal",
+                    true
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What is the closest star to Earth?",
+                    new String[]{"Alpha Centauri", "Polaris", "Sirius", "The Sun"},
+                    "The Sun"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What tool is used to measure temperature?",
+                    new String[]{"Thermometer", "Ruler", "Compass", "Stopwatch"},
+                    "Thermometer"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Oil, natural gas and coal are examples of …",
+                    new String[]{"Geothermal resources", "Biofuels", "Renewable resources", "Fossil fuels"},
+                    "Fossil fuels"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "The boiling point of water at standard atmospheric pressure is 0 Kelvin.",
+                    false
+            ));
         } else if (topic.equals("History") && difficulty.equals("Hard")) {
             questions.add(new MultipleChoiceQuestion(
                     "What were the main causes of the Crusades?",

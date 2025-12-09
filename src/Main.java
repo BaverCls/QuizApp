@@ -91,7 +91,7 @@ class Quiz implements Gradable {
         return difficulty;
     }
 
-    @Override //sko
+    @Override
     public int calculateScore() {
         int score = 0;
         for (Question q : questions) {
