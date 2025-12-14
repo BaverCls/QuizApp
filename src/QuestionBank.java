@@ -201,13 +201,57 @@ public class QuestionBank {
                     true
             ));
         }
-        else if (topic.equals("Technology")) {
+        else if (topic.equals("Technology") && difficulty.equals("Easy")) {
             questions.add(new MultipleChoiceQuestion(
                     "Which of the following is an operating system?",
                     new String[]{"Java", "Python", "Windows", "HTML"},
                     "Windows"
             ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What does “CPU” stand for?",
+                    new String[]{"Central Processing Unit","Computer Power Unit", "Core Programming Utility", "Central Programming Unit"},
+                    "Central Processing Unit"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which of these is an example of artificial intelligence?",
+                    new String[]{"A calculator", "A light switch", "Voice assistants like Siri", "A regular keybord"},
+                    "Voice assistants like Siri"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "RAM stores data permanently, even when the computer is turned off.",
+                    false
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What type of technology is used to scan your fingerprint on phones?",
+                    new String[]{"Infrared","Biometric sensor", "Magnetic reader","Laser pointer"},
+                    "Biometric sensor"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What does a compiler do?",
+                    new String[]{"Draws graphics","Deletes unused files","Converts source code into machine code","Runs the internet"},
+                    "Converts source code into machine code"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "Cloud storage allows users to access their files from any device with internet access.",
+                    true
+
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which of the following is used for version control?\n",
+                    new String[]{"Git","Usb","Java","Router"},
+                    "Git"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Html is mainly used for...",
+                    new String[]{"Creating websites","Editing videos","Designing mobile apps","Machine learning"},
+                    "Creating websites"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "Bluetooth is mainly used for long-distance communication over several kilometers.",
+                    false
+            ));
         }
+
 
         return questions;
     }
