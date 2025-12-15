@@ -250,6 +250,55 @@ public class QuestionBank {
                     "Bluetooth is mainly used for long-distance communication over several kilometers.",
                     false
             ));
+        } else if (topic.equals("Technology")&& difficulty.equals("Medium")) {
+            questions.add(new MultipleChoiceQuestion(
+                    "What is the core part of an operating system that manages system resources and acts as the interface between hardware and software?",
+                    new String[]{"Graphical User Interface (GUI)","Device Drive","System Utility","Kernel"},
+                    "Kernel"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Compared to a traditional Hard Disk Drive (HDD), what is the main performance advantage of a Solid State Drive (SSD)?",
+                    new String[]{"Higher physical capacity in the same size factor","Significantly lower cost per gigabyte","Faster data access speeds due to no moving mechanical parts","Longer lifespan in terms of total write cycles"},
+                    "Faster data access speeds due to no moving mechanical parts"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "The CPU's clock speed is measured in Hertz (Hz) and determines how many instruction cycles the CPU can execute per second.",
+                    true
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What is the primary benefit of using 'threads' instead of separate 'processes' in a modern operating system?",
+                    new String[]{"Shared memory space and reduced context switching overhead","Easier debugging for developers","Complete memory isolation between tasks","Guaranteed real-time execution"},
+                    "Shared memory space and reduced context switching overhead"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "In a relational database, a foreign key is used to uniquely identify each record in the table.",
+                    false
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "In C/C++ programming, what memory area is generally used for dynamic memory allocation (e.g., memory requested by the programmer using 'malloc' or 'new')?",
+                    new String[]{"The Stack","The Data Segment","The Code Segment","The Heap"},
+                    "The Heap"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which of the following protocols is connection-oriented and guarantees the delivery of data packets by retransmitting lost or corrupted data?",
+                    new String[]{"User Datagram Protocol (UDP)","Transmission Control Protocol (TCP)","Address Resolution Protocol","Internet Control Message Protocol (ICMP)"},
+                    "Transmission Control Protocol (TCP)"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "A Graphics Processing Unit (GPU) is solely dedicated to rendering visuals and cannot be used for general-purpose parallel computing tasks.",
+                    false
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which of the following best describes the relationship between a Class and an Object in OOP?",
+                    new String[]{"An Object is a blueprint for a Class","They are interchangeable terms and mean the same thing","A Class is an instance of an Object","A Class is a blueprint (template) from which Objects (instances) are created"},
+                    "A Class is a blueprint (template) from which Objects (instances) are created"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What term describes the situation where a machine learning model performs exceptionally well on the training data but performs poorly on the unseen test data?",
+                    new String[]{"Underfitting","Bias","Overfitting","Variance"},
+                    "Overfitting"
+            ));
+
         }
 
 
