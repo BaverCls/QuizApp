@@ -299,6 +299,67 @@ public class QuestionBank {
                     "Overfitting"
             ));
 
+        } else if (topic.equals("Technology") && difficulty.equals("Hard")) {
+
+            questions.add(new MultipleChoiceQuestion(
+                    //Htmlli soru denemesi, belki sonra değiştiririm
+                    "<html>What is the output of this code?<br><br>" +
+                            "<pre>" +
+                            "String s = \"Java\";\n" +
+                            "s.concat(\" Dev\");\n" +
+                            "System.out.println(s);" +
+                            "</pre></html>",
+                    new String[]{"Java", "Java Dev", "Dev", "Compilation Error"},
+                    "Java"
+            ));
+
+            questions.add(new MultipleChoiceQuestion(
+                    "Which CPU feature allows a single physical core to execute multiple instruction streams simultaneously?",
+                    new String[]{"Superscalar execution","Out-of-order execution","Hyper-Threading (SMT)","Branch prediction"},
+                    "Hyper-Threading (SMT)"
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which HTTP status code indicates that the request was valid but the server refuses to authorize it?",
+                    new String[]{"401","403","404","505"},
+                    "403"
+            ));questions.add(new MultipleChoiceQuestion(
+                    "What is the key advantage of stateless REST APIs?",
+                    new String[]{"Easier horizontal scaling","Stronger security","Faster execution","Reduced bandwidth usage"},
+                    "Easier horizontal scaling"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "The primary purpose of a 'Demilitarized Zone (DMZ)' in a network is to host internal servers that require strict isolation from both the external internet and the internal LAN.",
+                    false
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What does 'Dependency Injection' primarily help to achieve in software engineering?",
+                    new String[]{"Increased execution speed through direct hardware access.","Tight coupling between different software modules.","Decoupling of objects from their dependencies, making the code more testable and maintainable.","Automatic translation of code into multiple languages."},
+                    "Decoupling of objects from their dependencies, making the code more testable and maintainable."
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which condition most commonly leads to a deadlock in database transactions?",
+                    new String[]{"High query latency","Missing indexes","Dirty reads","Circular wait between transactions"},
+                    "Circular wait between transactions"
+            ));
+            questions.add(new TrueFalseQuestion(
+                    "In a relational database, the primary key can contain null values, provided that the combination of all other columns remains unique.",
+                    false
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "What is the primary purpose of a 'Reverse Proxy' in a high-traffic server architecture?",
+                    new String[]{"To bypass government firewalls using encrypted tunnels.","To allow internal users to browse the internet anonymously.","To act as an intermediary for requests from the internet to resources located on a private network.","To speed up local database queries by reversing the index order."},
+                    "To act as an intermediary for requests from the internet to resources located on a private network."
+            ));
+            questions.add(new MultipleChoiceQuestion(
+                    "Which of the following describes a 'Race Condition' in multi-threaded programming?",
+                    new String[]{"When the output of a process is unexpectedly dependent on the sequence or timing of uncontrollable events.","An intentional delay added to code to synchronize hardware components.","A method to optimize CPU usage by running threads at maximum speed.","A situation where two threads are waiting for each other to release a resource, causing a freeze."},
+                    "When the output of a process is unexpectedly dependent on the sequence or timing of uncontrollable events."
+            ));
+
+
+
+
+
         }
 
 
