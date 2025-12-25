@@ -1,5 +1,9 @@
 package com.quizapp.model;
 
+/**
+ * Represents a true/false question type.
+ * Validates user input against a boolean correct answer.
+ */
 public class TrueFalseQuestion extends Question {
     private boolean correctAnswer;
 

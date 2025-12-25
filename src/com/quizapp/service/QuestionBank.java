@@ -1,4 +1,4 @@
-package com.quizapp.service;// File: src/com.quizapp.service.QuestionBank.java
+package com.quizapp.service;
 import com.quizapp.model.MultipleChoiceQuestion;
 import com.quizapp.model.Question;
 import com.quizapp.model.TrueFalseQuestion;

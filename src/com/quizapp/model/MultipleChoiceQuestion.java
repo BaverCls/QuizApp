@@ -1,5 +1,9 @@
 package com.quizapp.model;
 
+/**
+ * Represents a multiple-choice question type.
+ * Contains a set of options and a single correct string answer.
+ */
 public class MultipleChoiceQuestion extends Question {
     private String[] options;
     private String correctAnswer;

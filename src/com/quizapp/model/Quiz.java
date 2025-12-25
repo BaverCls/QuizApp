@@ -3,6 +3,11 @@ package com.quizapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Represents a single quiz session.
+ * Manages a list of Question objects and implements Gradable to compute final scores.
+ */
 public class Quiz implements Gradable {
     private List<Question> questions = new ArrayList<>();
     private String topic;
