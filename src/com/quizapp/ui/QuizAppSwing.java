@@ -1,3 +1,9 @@
+package com.quizapp.ui;
+import com.quizapp.model.MultipleChoiceQuestion;
+import com.quizapp.model.Question;
+import com.quizapp.model.Quiz;
+import com.quizapp.model.TrueFalseQuestion;
+import com.quizapp.service.QuestionBank;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -20,7 +26,7 @@ public class QuizAppSwing extends JFrame {
     private ButtonGroup optionsGroup;
 
     public QuizAppSwing() {
-        setTitle("Quiz Application");
+        setTitle("OOP QUIZ");
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -31,7 +37,7 @@ public class QuizAppSwing extends JFrame {
         // 1. Setup Panel
         cardPanel.add(createSetupPanel(), "SETUP");
 
-        // 2. Quiz Active Panel
+        // 2. com.quizapp.model.Quiz Active Panel
         cardPanel.add(createQuizPanel(), "QUIZ");
 
 
@@ -44,7 +50,7 @@ public class QuizAppSwing extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel title = new JLabel("Quiz");
+        JLabel title = new JLabel("Quiz title");
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -88,7 +94,7 @@ public class QuizAppSwing extends JFrame {
         gbc.gridy = 5;
         panel.add(difficultyPanel, gbc);
 
-        JButton startQuizButton = new JButton("Start Quiz");
+        JButton startQuizButton = new JButton("Start");
         startQuizButton.setEnabled(false); // Initially disabled
         startQuizButton.addActionListener(e -> {
             String name = nameField.getText().trim();
@@ -113,7 +119,7 @@ public class QuizAppSwing extends JFrame {
             cardLayout.show(cardPanel, "QUIZ");
         });
 
-        // Enable the Start Quiz button only when both subject and difficulty are selected
+
         ActionListener enableStartButton = e -> {
             if (subjectGroup.getSelection() != null && difficultyGroup.getSelection() != null) {
                 startQuizButton.setEnabled(true);
@@ -149,7 +155,7 @@ public class QuizAppSwing extends JFrame {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
         panel.add(optionsPanel, BorderLayout.CENTER);
 
-        JButton nextButton = new JButton("Next Question");
+        JButton nextButton = new JButton("Next");
         nextButton.addActionListener(e -> handleNextQuestion());
         panel.add(nextButton, BorderLayout.SOUTH);
 
@@ -164,7 +170,7 @@ public class QuizAppSwing extends JFrame {
         }
 
         this.studentName = name;
-        this.currentQuiz = generateQuiz(topic, difficulty); // Generate 10 questions
+        this.currentQuiz = generateQuiz(topic, difficulty);
         this.currentQuestionIndex = 0;
 
         loadQuestionUI();
@@ -209,6 +215,12 @@ public class QuizAppSwing extends JFrame {
     }
 
     private void handleNextQuestion() {
+        if (optionsGroup == null) {
+            JOptionPane.showMessageDialog(this, "Couldn't upload the questions.");
+            return;
+        }
+
+
         if (optionsGroup.getSelection() == null) {
             JOptionPane.showMessageDialog(this, "Please mark an answer");
             return;
@@ -246,7 +258,7 @@ public class QuizAppSwing extends JFrame {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (Question q : currentQuiz.getQuestions()) {
             if (!q.checkAnswer()) {
-                listModel.addElement("<html><b>Soru:</b> " + q.getText() +
+                listModel.addElement("<html><b>Question:</b> " + q.getText() +
                         "<br><b>Your Answer:</b> <font color='red'>" + q.getUserAnswer() + "</font>" +
                         "<br><b>Correct:</b> <font color='green'>" + q.getCorrectAnswerDisplay() + "</font><br><hr></html>");
             }
@@ -271,7 +283,7 @@ public class QuizAppSwing extends JFrame {
         resultPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Restart Button
-        JButton restartBtn = new JButton("New Quiz");
+        JButton restartBtn = new JButton("Restart");
         restartBtn.addActionListener(e -> {
             nameField.setText("");
             cardLayout.show(cardPanel, "SETUP");
