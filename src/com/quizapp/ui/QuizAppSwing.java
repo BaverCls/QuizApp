@@ -9,6 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
 
+/**
+ * The main Graphical User Interface (GUI) for the Quiz Application.
+ * Manages screen transitions between setup, the active quiz, and final results.
+ */
+
 public class QuizAppSwing extends JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
@@ -25,6 +30,10 @@ public class QuizAppSwing extends JFrame {
     private JPanel optionsPanel;
     private ButtonGroup optionsGroup;
 
+    /**
+     * Initializes the UI components and starts the application.
+     */
+
     public QuizAppSwing() {
         setTitle("OOP QUIZ");
         setSize(600, 500);
@@ -37,7 +46,7 @@ public class QuizAppSwing extends JFrame {
         // 1. Setup Panel
         cardPanel.add(createSetupPanel(), "SETUP");
 
-        // 2. com.quizapp.model.Quiz Active Panel
+        // 2. Quiz Activate Panel
         cardPanel.add(createQuizPanel(), "QUIZ");
 
 
@@ -233,10 +242,13 @@ public class QuizAppSwing extends JFrame {
         loadQuestionUI();
     }
 
+    /**
+     * Displays the final score and a list of incorrectly answered questions.
+     */
     private void showResults() {
         JPanel resultPanel = new JPanel(new BorderLayout());
 
-        // Header
+        // Result Header
         JPanel header = new JPanel(new GridLayout(2, 1));
         header.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         header.setBackground(Color.DARK_GRAY);

@@ -9,7 +9,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class responsible for managing the question data.
+ * It handles reading questions from an external text file and filtering them
+ * based on category and difficulty.
+ */
+
+
 public class QuestionBank {
+
+    /**
+     * Loads and filters questions from the resource file.
+     * @param topic The subject of the questions (e.g., Science, History).
+     * @param difficulty The level of difficulty (e.g., Easy, Hard).
+     * @return A list of filtered Question objects.
+     */
 
     private static final String FILE_PATH = "src/questions.txt";
 
