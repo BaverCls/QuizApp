@@ -56,7 +56,7 @@ public class QuizAppSwing extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel title = new JLabel("Quiz title");
+        JLabel title = new JLabel("Quiz");
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setHorizontalAlignment(SwingConstants.CENTER);
 

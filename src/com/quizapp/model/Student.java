@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Represents a student participating in the quiz.
- * Tracks the student's name, their most recent score, and their entire score history.
+ * Tracks the student's name, and their most recent score.
  */
 public class Student {
     private String name;

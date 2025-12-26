@@ -27,19 +27,7 @@ TF|Science|Hard|Natural selection always leads to organisms becoming more comple
 TF|Science|Hard|An object moving in a circle at constant speed has zero acceleration.|false|false
 MC|Science|Hard|Which phase of the cell cycle is primarily responsible for DNA repair before mitosis?|G₁ phase;G₂ phase;S phase;M phase|G₂ phase
 MC|Science|Hard|Which phenomenon proves the particle nature of light?|Diffraction;Interference;Photoelectric effect;Refraction|Photoelectric effect
-MC|Science|Hard|What is the Heisenberg Uncertainty Principle?|It states that energy cannot be created or destroyed;It states that the position and momentum of a particle cannot both be precisely determined at the same time;It states that for every action, there is an equal and opposite reaction;It states that light behaves both as a wave and a particle|It states that the position and momentum of a particle cannot both be precisely determined at the same time
-MC|Science|Hard|Which particle is responsible for mediating the strong nuclear force?|Photon;Gluon;W boson;Z boson|Gluon
-TF|Science|Hard|In quantum mechanics, particles can exist in multiple states simultaneously until measured.|true|true
-MC|Science|Hard|Which layer of Earth’s atmosphere contains the ozone layer?|Troposphere;Stratosphere;Mesosphere;Thermosphere|Stratosphere
-MC|Science|Hard|What phenomenon occurs when a wave changes frequency due to the relative motion of the observer and the source?|Diffraction;Interference;Dispersion;Doppler Effect|Doppler Effect
-TF|Science|Hard|Natural selection always leads to organisms becoming more complex over time.|false|false
-TF|Science|Hard|An object moving in a circle at constant speed has zero acceleration.|false|false
-MC|Science|Hard|Which phase of the cell cycle is primarily responsible for DNA repair before mitosis?|G₁ phase;G₂ phase;S phase;M phase|G₂ phase
-MC|Science|Hard|Which phenomenon proves the particle nature of light?|Diffraction;Interference;Photoelectric effect;Refraction|Photoelectric effect
 MC|Science|Hard|What type of symbiosis results in one organism benefiting while the other is harmed?|Mutualism;Commensalism;Neutralism;Parasitism|Parasitism
-MC|History|Hard|What were the main causes of the Crusades?|Desire to spread Islamic teachings;Competition between European merchants;Religious motivations and control of the Holy Land;Fear of Viking invasions|Religious motivations and control of the Holy Land
-MC|History|Hard|Which ancient civilization built Machu Picchu?|Aztecs;Mayans;Greeks;Incas|Incas
-TF|History|Hard|The Renaissance began in Italy during the 14th century.|true|true
 MC|Technology|Easy|Which of the following is an operating system?|Java;Python;Windows;HTML|Windows
 MC|Technology|Easy|What does “CPU” stand for?|Central Processing Unit;Computer Power Unit;Core Programming Utility;Central Programming Unit|Central Processing Unit
 MC|Technology|Easy|Which of these is an example of artificial intelligence?|A calculator;A light switch;Voice assistants like Siri;A regular keybord|Voice assistants like Siri
@@ -60,7 +48,7 @@ MC|Technology|Medium|Which of the following protocols is connection-oriented and
 TF|Technology|Medium|A Graphics Processing Unit (GPU) is solely dedicated to rendering visuals and cannot be used for general-purpose parallel computing tasks.|false|false
 MC|Technology|Medium|Which of the following best describes the relationship between a Class and an Object in OOP?|An Object is a blueprint for a Class;They are interchangeable terms and mean the same thing;A Class is an instance of an Object;A Class is a blueprint (template) from which Objects (instances) are created|A Class is a blueprint (template) from which Objects (instances) are created
 MC|Technology|Medium|What term describes the situation where a machine learning model performs exceptionally well on the training data but performs poorly on the unseen test data?|Underfitting;Bias;Overfitting;Variance|Overfitting
-MC|Technology|Hard|<html>What is the output of this code?<br><br><pre>String s = \"Java\";\ns.concat(\" Dev\");\nSystem.out.println(s);</pre></html>|Java;Java Dev;Dev;Compilation Error|Java
+MC|Technology|Hard|Which of the following best describes the 'Liskov Substitution Principle' (LSP) in SOLID design principles?|A class should have only one reason to change.;Software entities should be open for extension but closed for modification.;Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.;Depend upon abstractions, not concretions.|Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.
 MC|Technology|Hard|Which CPU feature allows a single physical core to execute multiple instruction streams simultaneously?|Superscalar execution;Out-of-order execution;Hyper-Threading (SMT);Branch prediction|Hyper-Threading (SMT)
 MC|Technology|Hard|Which HTTP status code indicates that the request was valid but the server refuses to authorize it?|401;403;404;505|403
 MC|Technology|Hard|What is the key advantage of stateless REST APIs?|Easier horizontal scaling;Stronger security;Faster execution;Reduced bandwidth usage|Easier horizontal scaling
@@ -73,6 +61,13 @@ MC|Technology|Hard|Which of the following describes a 'Race Condition' in multi-
 MC|History|Easy|Who was the first president of the United States?|George Washington;Abraham Lincoln;Thomas Jefferson;John Adams|George Washington
 TF|History|Easy|The Titanic sank in 1912.|true|true
 MC|History|Easy|Which empire was ruled by Julius Caesar?|Ottoman Empire;Roman Empire;British Empire;Mongol Empire|Roman Empire
+MC|History|Easy|The Byzantine Empire was a continuation of the eastern half of which powerful ancient empire?|The Macedonian Empire;The Persian Empire;The Roman Empire;The Hellenistic Empire|The Roman Empire
+MC|History|Easy|Which ancient civilization developed cuneiform writing?|Egyptians;Phoenicians;Sumerians;Hittites|Sumerians
+MC|History|Easy|On which front did the Ottoman Empire achieve a major victory during the World War I?|Caucasus Front;Sinai and Palestine Front;Gallipoli Front;Mesopotamian Front|Gallipoli Front
+MC|History|Easy|During the Chinese Civil War, Mao Zedong was the leader of which political movement?|The Nationalist Party (Kuomintang);The Chinese Communist Party;The Qing imperial government;The Beiyang government|The Chinese Communist Party
+TF|History|Easy|Julius Caesar conquered Gaul during his military campaigns in the late Roman Republic.|true|true
+MC|History|Easy|Which event is most closely associated with the Migration Period (Great Migration of Peoples) in European history?|The fall of the Western Roman Empire;The beginning of the Renaissance;The discovery of the Americas;The signing of the Magna Carta|The fall of the Western Roman Empire
+TF|History|Easy|Otto von Bismarck is best known for his role in unifying Italy.|false|false
 MC|History|Medium|Which year did World War II end?|1943;1944;1945;1946|1945
 TF|History|Medium|The French Revolution began in 1789.|true|true
 MC|History|Hard|What were the main causes of the Crusades?|Desire to spread Islamic teachings;Competition between European merchants;Religious motivations and control of the Holy Land;Fear of Viking invasions|Religious motivations and control of the Holy Land
