@@ -1,8 +1,5 @@
 package com.quizapp.ui;
-import com.quizapp.model.MultipleChoiceQuestion;
-import com.quizapp.model.Question;
-import com.quizapp.model.Quiz;
-import com.quizapp.model.TrueFalseQuestion;
+import com.quizapp.model.*;
 import com.quizapp.service.QuestionBank;
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +16,7 @@ public class QuizAppSwing extends JFrame {
     private CardLayout cardLayout;
 
     // Game State
-    private String studentName;
+    private Student currentStudent;
     private Quiz currentQuiz;
     private int currentQuestionIndex = 0;
 
@@ -120,7 +117,7 @@ public class QuizAppSwing extends JFrame {
                 return;
             }
 
-            this.studentName = name;
+            this.currentStudent = new Student(name);
             this.currentQuiz = generateQuiz(selectedSubject, selectedDifficulty);
             this.currentQuestionIndex = 0;
 
@@ -178,7 +175,7 @@ public class QuizAppSwing extends JFrame {
             return;
         }
 
-        this.studentName = name;
+        this.currentStudent = new Student(name);
         this.currentQuiz = generateQuiz(topic, difficulty);
         this.currentQuestionIndex = 0;
 
@@ -248,6 +245,7 @@ public class QuizAppSwing extends JFrame {
     private void showResults() {
         JPanel resultPanel = new JPanel(new BorderLayout());
 
+
         // Result Header
         JPanel header = new JPanel(new GridLayout(2, 1));
         header.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -258,7 +256,7 @@ public class QuizAppSwing extends JFrame {
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel nameLabel = new JLabel("Student: " + studentName);
+        JLabel nameLabel = new JLabel("Student: " + currentStudent.getName());
         nameLabel.setForeground(Color.LIGHT_GRAY);
         nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -306,10 +304,25 @@ public class QuizAppSwing extends JFrame {
         cardLayout.show(cardPanel, "RESULTS");
     }
 
-    // Sorular
+    /**
+     * Generates a new Quiz object populated with randomized questions
+     * based on the specified subject and difficulty level.
+     * * @param topic The subject of the quiz (e.g., History, Science)
+     * @param difficulty The difficulty level (e.g., Easy, Medium, Hard)
+     * @return A Quiz object containing the prepared questions
+     */
     private Quiz generateQuiz(String topic, String difficulty) {
+        // Create a new Quiz instance to hold the selected questions
         Quiz quiz = new Quiz();
-        quiz.getQuestions().addAll(QuestionBank.getQuestionsForTopic(topic, difficulty));
+
+        //  Retrieve the list of questions matching the selected topic and difficulty from the QuestionBank
+        java.util.List<Question> questionList = QuestionBank.getQuestionsForTopic(topic, difficulty);
+
+        //  Randomly reorder the questions to ensure a unique experience for everytime the quiz is taken
+        java.util.Collections.shuffle(questionList);
+
+        //  Added the shuffled list of questions into the Quiz object's internal collection
+        quiz.getQuestions().addAll(questionList);
         return quiz;
     }
 
