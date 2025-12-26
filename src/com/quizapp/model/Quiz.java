@@ -13,7 +13,7 @@ public class Quiz implements Gradable {
     private String topic;
     private String difficulty;
 
-    public Quiz(String topic, String difficulty) {
+    public Quiz() {
         this.topic = topic;
         this.difficulty = difficulty;
         this.questions = new ArrayList<>();

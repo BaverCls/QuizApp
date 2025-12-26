@@ -308,7 +308,7 @@ public class QuizAppSwing extends JFrame {
 
     // Sorular
     private Quiz generateQuiz(String topic, String difficulty) {
-        Quiz quiz = new Quiz(topic, difficulty);
+        Quiz quiz = new Quiz();
         quiz.getQuestions().addAll(QuestionBank.getQuestionsForTopic(topic, difficulty));
         return quiz;
     }
