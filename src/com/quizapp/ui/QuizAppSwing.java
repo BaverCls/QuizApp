@@ -50,6 +50,10 @@ public class QuizAppSwing extends JFrame {
         add(cardPanel);
     }
 
+    private Timer quizTimer;
+    private int timeLeft = 180;
+    private JLabel timerLabel;
+
     private JPanel createSetupPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -123,6 +127,9 @@ public class QuizAppSwing extends JFrame {
 
             loadQuestionUI();
             cardLayout.show(cardPanel, "QUIZ");
+
+            //Timerı başlat
+            startCountdown();
         });
 
 
@@ -152,10 +159,18 @@ public class QuizAppSwing extends JFrame {
         JPanel panel = new JPanel(new BorderLayout(20, 20));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        questionLabel = new JLabel("Soru burada görünecek");
+        JPanel topPanel = new JPanel(new BorderLayout());
+        questionLabel = new JLabel("Question will appear here");
         questionLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
+        timerLabel = new JLabel("Time: 03:00");
+        timerLabel.setFont(new Font("Monospaced", Font.BOLD, 18));
+        timerLabel.setForeground(Color.RED);
+
         questionLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
-        panel.add(questionLabel, BorderLayout.NORTH);
+        topPanel.add(questionLabel, BorderLayout.WEST);
+        topPanel.add(timerLabel, BorderLayout.EAST);
+        panel.add(topPanel, BorderLayout.NORTH);
 
         optionsPanel = new JPanel();
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
@@ -220,6 +235,33 @@ public class QuizAppSwing extends JFrame {
         optionsPanel.repaint();
     }
 
+    private void startCountdown() {
+        timeLeft = 180;
+        updateTimerDisplay();
+
+        if (quizTimer != null && quizTimer.isRunning()) {
+            quizTimer.stop();
+        }
+
+        quizTimer = new Timer(1000, e -> {
+            timeLeft--;
+            if (timeLeft <= 0) {
+                quizTimer.stop();
+                JOptionPane.showMessageDialog(this, "Time is up!");
+                showResults();
+            } else {
+                updateTimerDisplay();
+            }
+        });
+        quizTimer.start();
+    }
+
+    private void updateTimerDisplay() {
+        int minutes = timeLeft / 60;
+        int seconds = timeLeft % 60;
+        timerLabel.setText(String.format("Time: %02d:%02d", minutes, seconds));
+    }
+
     private void handleNextQuestion() {
         if (optionsGroup == null) {
             JOptionPane.showMessageDialog(this, "Couldn't upload the questions.");
@@ -269,8 +311,10 @@ public class QuizAppSwing extends JFrame {
         for (Question q : currentQuiz.getQuestions()) {
             if (!q.checkAnswer()) {
                 listModel.addElement("<html><b>Question:</b> " + q.getText() +
-                        "<br><b>Your Answer:</b> <font color='red'>" + q.getUserAnswer() + "</font>" +
-                        "<br><b>Correct:</b> <font color='green'>" + q.getCorrectAnswerDisplay() + "</font><br><hr></html>");
+                        "<br><b>Your Answer:</b> <font color='red'>" +
+                        (q.getUserAnswer() == null ? "Not Answered" : q.getUserAnswer()) +
+                        "</font><br><b>Correct:</b> <font color='green'>" +
+                        q.getCorrectAnswerDisplay() + "</font><br><hr></html>");
             }
         }
 
