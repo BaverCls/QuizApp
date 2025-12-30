@@ -27,9 +27,6 @@ public class Quiz implements Gradable {
         return questions;
     }
 
-    public String getDifficulty() {
-        return difficulty;
-    }
 
     @Override
     public int calculateScore() {

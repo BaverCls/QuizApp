@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Student {
     private String name;
-    private double lastScore;
+    private int lastScore;
 
     /**
      * Initializes a new Student with the given name.
@@ -23,9 +23,10 @@ public class Student {
      * @return The student's name.
      */
     public String getName() { return name; }
+    public void setLastScore(int score) { this.lastScore = score; }
     /**
      * @return The most recent score recorded for this student.
      */
-    public double getLastScore() { return lastScore; }
+    public int getLastScore() { return lastScore; }
 
 }

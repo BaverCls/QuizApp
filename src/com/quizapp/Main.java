@@ -1,6 +1,6 @@
 package com.quizapp;
 
-import com.quizapp.ui.QuizAppSwing; // QuizAppSwing hangi paketteyse onu import etmelisin
+import com.quizapp.ui.QuizAppSwing; //Swingi çekiyoruz
 import javax.swing.SwingUtilities;
 
 public class Main {

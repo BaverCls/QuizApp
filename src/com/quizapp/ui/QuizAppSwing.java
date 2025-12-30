@@ -113,6 +113,7 @@ public class QuizAppSwing extends JFrame {
                 return;
             }
 
+            //Zorlukla konuyu atama
             String selectedSubject = subjectGroup.getSelection() != null ? subjectGroup.getSelection().getActionCommand() : null;
             String selectedDifficulty = difficultyGroup.getSelection() != null ? difficultyGroup.getSelection().getActionCommand() : null;
 
@@ -183,20 +184,6 @@ public class QuizAppSwing extends JFrame {
         return panel;
     }
 
-    private void startQuiz(String topic, String difficulty) {
-        String name = nameField.getText().trim();
-        if (name.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter your name");
-            return;
-        }
-
-        this.currentStudent = new Student(name);
-        this.currentQuiz = generateQuiz(topic, difficulty);
-        this.currentQuestionIndex = 0;
-
-        loadQuestionUI();
-        cardLayout.show(cardPanel, "QUIZ");
-    }
 
     // Soru UI ını yükler
     private void loadQuestionUI() {
@@ -206,7 +193,7 @@ public class QuizAppSwing extends JFrame {
         }
 
         Question q = currentQuiz.getQuestions().get(currentQuestionIndex);
-        questionLabel.setText("<html>Question " + (currentQuestionIndex + 1) + "/10: <br><br><br>" + q.getText() + "</html>");
+        questionLabel.setText("<html><body style='width: 400px;'>" + "Question " + (currentQuestionIndex + 1) + "/10: <br><br>" + q.getText() + "</body></html>");
 
         optionsPanel.removeAll();
         optionsGroup = new ButtonGroup();
@@ -285,6 +272,15 @@ public class QuizAppSwing extends JFrame {
      * Displays the final score and a list of incorrectly answered questions.
      */
     private void showResults() {
+
+        // Stop the timer if its still running
+        if (quizTimer != null) {
+            quizTimer.stop();
+        }
+
+        int finalScore = currentQuiz.calculateScore();
+        currentStudent.setLastScore(finalScore);
+
         JPanel resultPanel = new JPanel(new BorderLayout());
 
 
@@ -293,7 +289,7 @@ public class QuizAppSwing extends JFrame {
         header.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         header.setBackground(Color.DARK_GRAY);
 
-        JLabel scoreLabel = new JLabel("Score: " + currentQuiz.calculateScore() + " / 10");
+        JLabel scoreLabel = new JLabel("Score: " + currentStudent.getLastScore() + " / 10");
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
