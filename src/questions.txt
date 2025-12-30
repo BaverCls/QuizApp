@@ -70,6 +70,21 @@ MC|History|Easy|Which event is most closely associated with the Migration Period
 TF|History|Easy|Otto von Bismarck is best known for his role in unifying Italy.|false|false
 MC|History|Medium|Which year did World War II end?|1943;1944;1945;1946|1945
 TF|History|Medium|The French Revolution began in 1789.|true|true
+MC|History|Medium|What was the Reconquista in medieval Iberian history?|The Islamic conquest of the Iberian Peninsula;The Christian reconquest of territories from Muslim rule;A trade alliance between Iberian kingdoms;A dynastic union between Castile and Aragon|The Christian reconquest of territories from Muslim rule
+MC|History|Medium|Which political faction emerged victorious in the Spanish Civil War (1936–1939)?|The Republicans;The Anarchists;The Nationalists;The Constitutional Monarchists|The Nationalists
+MC|History|Medium|What was the most significant outcome of the Fourth Crusade (1202–1204)?|The capture of Jerusalem;The establishment of the Latin Empire after the sack of Constantinople;The permanent unification of the Churches;The defeat of the Seljuk Turks|The establishment of the Latin Empire after the sack of Constantinople
+MC|History|Medium|Which two primary nations fought in the Hundred Years' War?|Britain and France;Spain and Portugal;Germany and Italy;Ottoman Empire and Russia|Britain and France
+TF|History|Medium|Augustus was the first emperor of Rome.|true|true
+MC|History|Medium|What was the primary cause of the Punic Wars between Rome and Carthage?|Religious conflicts;Competition for control over trade routes and territories in the western Mediterranean;Disputes over the Roman Senate;Cultural differences|Competition for control over trade routes and territories in the western Mediterranean
+MC|History|Medium|Which event during the Battle of Karbala (680) had a lasting impact on the division between Sunni and Shia Islam?|The defeat of the Byzantine forces;The death of Husayn ibn Ali and his followers;The establishment of the Umayyad Caliphate;The compilation of the Qur'an|The death of Husayn ibn Ali and his followers
+MC|History|Medium|Mansa Musa was the emperor of which African empire in the 14th century?|Songhai Empire;Mali Empire;Ghana Empire;Benin Empire|Mali Empire
+MC|History|Hard|King Cnut ruled as king of which combination of kingdoms in the early 11th century?|England and France;England and Denmark;Denmark and Sweden;England and Norway|England and Denmark
+MC|History|Hard|King Władysław III of Hungary was killed during which major battle against the Ottoman Empire?|Battle of Kosovo;Battle of Nicopolis;Battle of Varna;Battle of Mohács|Battle of Varna
+MC|History|Hard|The Iberian Wedding refers to the dynastic marriage that united the crowns of which two kingdoms?|Portugal and Castile;Aragon and Navarre;Castile and Aragon;Aragon and Granada|Castile and Aragon
+TF|History|Hard|The Janissary Corps was abolished by Sultan Mahmud II.|true|true
+MC|History|Hard|Which treaty divided newly discovered lands between Spain and Portugal during the Age of Exploration?|Treaty of Utrecht;Treaty of Tordesillas;Treaty of Westphalia;Treaty of Versailles|Treaty of Tordesillas
+MC|History|Hard|Which political development directly led to the abolition of the Holy Roman Empire in 1806?|Treaty of Pressburg and the formation of the Confederation of the Rhine;Napoleon’s defeat at the Battle of Leipzig;The Congress of Vienna;The outbreak of the Peninsular War|Treaty of Pressburg and the formation of the Confederation of the Rhine
+TF|History|Hard|Napoleon Bonaparte was defeated at the Battle of Waterloo after returning to power during the Hundred Days.|true|true
 MC|History|Hard|What were the main causes of the Crusades?|Desire to spread Islamic teachings;Competition between European merchants;Religious motivations and control of the Holy Land;Fear of Viking invasions|Religious motivations and control of the Holy Land
 MC|History|Hard|Which ancient civilization built Machu Picchu?|Aztecs;Mayans;Greeks;Incas|Incas
 TF|History|Hard|The Renaissance began in Italy during the 14th century.|true|true
