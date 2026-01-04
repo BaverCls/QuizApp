@@ -7,8 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.Enumeration;
 
 /**
- * The main Graphical User Interface (GUI) for the Quiz Application.
- * Manages screen transitions between setup, the active quiz, and final results.
+ * GUI       DEVRE DIŞI
  */
 
 public class QuizAppSwing extends JFrame {

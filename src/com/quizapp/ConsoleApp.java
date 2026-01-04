@@ -2,10 +2,20 @@ package com.quizapp;
 
 import com.quizapp.model.*;
 import com.quizapp.service.QuestionBank;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main application controller that manages the Quiz lifecycle via a Console Interface.
+ * This class implements a 3-minute time limit, randomized question delivery using shuffle,
+ * and strict input validation to ensure a robust user experience.
+ */
 public class ConsoleApp {
+
+    // 3 minutes in milliseconds
+    private static final long TIME_LIMIT = 180000;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -16,29 +26,33 @@ public class ConsoleApp {
             System.out.println("    WELCOME TO THE QUIZ APPLICATION     ");
             System.out.println("========================================");
 
-            // 1. Name Validation
             String name = "";
             while (name.isEmpty()) {
                 System.out.print("Please enter your name: ");
                 name = scanner.nextLine().trim();
-                if (name.isEmpty()) System.out.println(" Name cannot be empty.");
+                if (name.isEmpty()) System.out.println("!!! Name cannot be empty.");
             }
             Student student = new Student(name);
 
-            // 2. Topic & Difficulty Selection
             String topic = getValidatedTopic(scanner);
             String difficulty = getValidatedDifficulty(scanner);
 
-            // 3. Quiz Session
             startQuizSession(student, topic, difficulty, scanner);
 
-            // 4. Restart Logic
             keepRunning = askToRestart(scanner);
         }
         System.out.println("\nExiting...");
         scanner.close();
     }
 
+    /**
+     * Executes the main quiz session. It handles the temporal control (3-minute limit),
+     * randomizes question order using Collections.shuffle, and manages the question-answer loop.
+     * @param student The current student participating in the quiz.
+     * @param topic The selected subject category.
+     * @param difficulty The selected level of difficulty.
+     * @param scanner The Scanner object for user input.
+     */
     private static void startQuizSession(Student student, String topic, String difficulty, Scanner scanner) {
         List<Question> questions = QuestionBank.getQuestionsForTopic(topic, difficulty);
 
@@ -47,21 +61,49 @@ public class ConsoleApp {
             return;
         }
 
+        // Shuffle the questions to randomize their order
+        Collections.shuffle(questions);
+
         Quiz quiz = new Quiz();
         questions.forEach(quiz::addQuestion);
 
-        System.out.println("\n--- Quiz Started: " + topic + " (" + difficulty + ") ---");
+        // --- Large Timer Alert ---
+        System.out.println("\n-------------------------------------------");
+        System.out.println("* *");
+        System.out.println("* !!! YOU HAVE 3 MINUTES !!!      *");
+        System.out.println("* *");
+        System.out.println("-------------------------------------------");
+
+        long startTime = System.currentTimeMillis(); // Timer starts here
+        boolean timeOut = false;
 
         for (int i = 0; i < quiz.getQuestions().size(); i++) {
-            Question q = quiz.getQuestions().get(i);
+            // Pre-question time check
+            if (System.currentTimeMillis() - startTime > TIME_LIMIT) {
+                timeOut = true;
+                break;
+            }
 
+            Question q = quiz.getQuestions().get(i);
             boolean valid = false;
+
             while (!valid) {
-                // FIXED: Reprints the full question on invalid input
+                // Secondary time check inside validation loop
+                if (System.currentTimeMillis() - startTime > TIME_LIMIT) {
+                    timeOut = true;
+                    break;
+                }
+
                 System.out.println("\nQuestion " + (i + 1) + ": " + q.getText());
                 valid = processAnswer(q, scanner);
                 if (!valid) System.out.println("!!! Invalid input. Please input a valid answer.");
             }
+
+            if (timeOut) break;
+        }
+
+        if (timeOut) {
+            System.out.println("\n\n[!] TIME EXCEEDED! Redirecting to results...");
         }
 
         displayResults(student, quiz);
@@ -76,21 +118,28 @@ public class ConsoleApp {
         System.out.println("Score: " + score + " / " + quiz.getQuestions().size());
         System.out.println("========================================");
 
-        // FIXED: Correct display of wrong answers
-        System.out.println("\n--- Review of Incorrect Answers ---");
+        System.out.println("\n--- Review of Incorrect/Unanswered Questions ---");
         boolean perfect = true;
         for (Question q : quiz.getQuestions()) {
             if (!q.checkAnswer()) {
                 perfect = false;
                 System.out.println("\nQ: " + q.getText());
-                // Note: Make sure getUserAnswer() is public in Question class
-                System.out.println("    Your Answer: " + q.getUserAnswer());
+                // Handle null answers from timeout
+                String userAns = (q.getUserAnswer() == null) ? "NOT ANSWERED (TIMEOUT)" : q.getUserAnswer();
+                System.out.println("    Your Answer: " + userAns);
                 System.out.println("    Correct Answer: " + q.getCorrectAnswerDisplay());
             }
         }
         if (perfect) System.out.println("Amazing! All answers were correct.");
     }
 
+    /**
+     * Processes and validates the user's answer based on the question type.
+     * objects through a single interface, ensuring strict input compliance.
+     * @param q The current Question object being answered.
+     * @param scanner The Scanner for reading user choices.
+     * @return boolean True if the input is valid and processed; false otherwise.
+     */
     private static boolean processAnswer(Question q, Scanner scanner) {
         if (q instanceof MultipleChoiceQuestion) {
             MultipleChoiceQuestion mcq = (MultipleChoiceQuestion) q;
