@@ -51,7 +51,7 @@ src/com/quizapp/
 
 ## 📝 Usage
 
-1. **Clone the repo:** `git clone <your-repo-link>`
+1. **Clone the repo:** `git clone https://github.com/BaverCls/QuizApp.git`
 2. **Ensure `questions.txt` is in the root directory.**
 3. **Run the application:** Execute the `Main.java` file.
 4. **Follow the prompts:** Enter your name, select a topic, and race against the 3-minute clock!
